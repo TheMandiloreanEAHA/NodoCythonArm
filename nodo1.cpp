@@ -54,9 +54,6 @@ void nodeCallback(const sensor_msgs::JointState& msg){
   //grabber = radianesAGrados(msg.position[7]);
   grabber = mapFloat(msg.position[7], -0.008, 0.008, 0, 180);
 
-
-  //ros::Rate loop_rate(10);
-
   //Asignamos los datos a publicar: 
   //NOTA: Mapearemos con la función mapFloat el valor en grados. Esto para convertirlo a su valor equivalente en pulsos (valor con el
   //que opera la placa SSC-32), cuyo rango es de 500(0°) a 2500(180°)
@@ -92,12 +89,9 @@ int main(int argc, char **argv){
   //Establecemos la velocidad en la que se publicarán los datos (10 veces por seg)
   ros::Rate loop_rate(10);
 
-  //ros::spin();
-
   // Ciclo para continuar publicando datos
   while (ros::ok()){
     ros::spinOnce();
-
     loop_rate.sleep();
   }
 
