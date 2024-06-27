@@ -54,11 +54,16 @@ Un nodo un ejecutable que usa ROS para comunicarse con otros nodos. Pero tambié
 **NOTA:** Los nodos deben crearse dentro de un paquete de ROS, dentro de la carpeta "src", en la cual se crean como archivos con extensión .cpp o .py
 Ya que son los lenguajes que manjea ROS (C++ y python) para la creación de nodos.
 
-Una vez creado el archivo cpp, hay que volverlo ejecutable, para esto, debemos modificar el archivo cmake que se crea por default al crear nuestro paquete de ROS.
+Una vez creado el archivo cpp, hay que volverlo ejecutable, para esto, debemos modificar el archivo CMakeList.txt que se crea por default al crear nuestro paquete de ROS. Para ello, agregaremos las siguientes lineas:
 
 ```text
-Contenido del Cmake Aquí
+add_executable(nodo1 src/nodo1.cpp)
+
+target_link_libraries(nodo1
+  ${catkin_LIBRARIES}  ${LIBS}  m
+)
 ```
+Esto crea un nodo ejecutable al que ROS puede mandar a llamar
 
 Una vez hecho esto, explicaré brevemente lo que hace este nodo.
 Primero, debemos importar las bibliotecas necesarias para que el nodo funcione.
@@ -113,7 +118,7 @@ rostopic echo /nodeFloatArray
    a la placa SSC-32).
 
 ```bash
-# Por corregir
+rosrun rosserial_python serial_node.py /dev/ttyACM0
 
 ```
 
